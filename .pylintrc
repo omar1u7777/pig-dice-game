@@ -1,0 +1,24 @@
+[MASTER]
+ignore=CVS,.git,__pycache__,.pytest_cache,htmlcov,doc
+jobs=1
+
+[MESSAGES CONTROL]
+disable=C0111,R0903
+
+[REPORTS]
+output-format=text
+reports=yes
+score=yes
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,x,y,id
+
+[FORMAT]
+max-line-length=100
+indent-string='    '
+
+[DESIGN]
+max-args=7
+max-attributes=10
+max-locals=15
+min-public-methods=1
