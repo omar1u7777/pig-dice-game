@@ -81,12 +81,12 @@ class Histogram:
             str: Multi-line string representation of histogram with bars
         """
         if not self._rolls:
-            return "📊 No rolls recorded yet."
+            return " No rolls recorded yet."
 
         counts = self.get_counts()
         total = len(self._rolls)
 
-        result = ["📊 Dice Roll Statistics", "=" * 30]
+        result = [" Dice Roll Statistics", "=" * 30]
         result.append(f"Total rolls: {total}")
         result.append("")
 

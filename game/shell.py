@@ -13,7 +13,7 @@ class GameShell(cmd.Cmd):
     """Complete command-line interface for Pig dice game."""
 
     intro = """
-🎲 Welcome to Pig Dice Game! 🎲
+Welcome to Pig Dice Game!
 ================================
 Type 'help' to see all commands
 Type 'rules' to learn how to play
@@ -39,7 +39,7 @@ Type 'start' to begin a new game
         """
         player_name = arg.strip() if arg.strip() else "Player"
 
-        print("\n🎮 Choose game mode:")
+        print("\nChoose game mode:")
         print("1. Single player (vs Computer)")
         print("2. Two players")
 
@@ -51,23 +51,23 @@ Type 'start' to begin a new game
                 human_player = Player(player_name, is_human=True)
                 ai_player = Player("Computer", is_human=False)
                 self.game = Game(human_player, ai_player)
-                print(f"🎮 Started: {player_name} vs Computer")
+                print(f"Started: {player_name} vs Computer")
             elif choice == "2":
                 # Two human players
                 player2_name = input("Enter Player 2 name: ").strip() or "Player 2"
                 player1 = Player(player_name, is_human=True)
                 player2 = Player(player2_name, is_human=True)
                 self.game = Game(player1, player2)
-                print(f"🎮 Started: {player_name} vs {player2_name}")
+                print(f"Started: {player_name} vs {player2_name}")
             else:
-                print("❌ Invalid choice. Try again.")
+                print("Invalid choice. Try again.")
                 return
 
             self.game.start_game()
             self._show_game_status()
 
         except (KeyboardInterrupt, EOFError):
-            print("\n❌ Game start cancelled.")
+            print("\nGame start cancelled.")
 
     def do_roll(self, arg):
         """Roll the dice."""
@@ -78,7 +78,7 @@ Type 'start' to begin a new game
 
         current_player = self.game.get_current_player()
         if not current_player.is_human():
-            print("❌ It's the computer's turn! Wait for AI to play.")
+            print("It's the computer's turn! Wait for AI to play.")
             return
 
         try:
@@ -86,16 +86,16 @@ Type 'start' to begin a new game
             self.histogram.add_roll(result)
 
             if result == 1:
-                print("💥 OH NO! Rolled a 1! Turn lost.")
+                print("OH NO! Rolled a 1! Turn lost.")
             else:
-                print(f"🎲 Rolled: {result}")
+                print(f"Rolled: {result}")
 
             self._show_game_status()
             self._check_for_winner()
             self._handle_ai_turn()
 
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
 
     def do_hold(self, arg):
         """Hold and bank your points."""
@@ -106,27 +106,27 @@ Type 'start' to begin a new game
 
         current_player = self.game.get_current_player()
         if not current_player.is_human():
-            print("❌ It's the computer's turn!")
+            print("It's the computer's turn!")
             return
 
         if current_player.get_turn_score() == 0:
-            print("❌ No points to hold! Roll first.")
+            print("No points to hold! Roll first.")
             return
 
         try:
             banked = self.game.hold_turn()
-            print(f"💰 Banked {banked} points!")
+            print(f"Banked {banked} points!")
             self._show_game_status()
             self._check_for_winner()
             self._handle_ai_turn()
 
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
 
     def do_status(self, arg):
         """Show current game status."""
         if not self.game:
-            print("❌ No game in progress. Use 'start' to begin.")
+            print("No game in progress. Use 'start' to begin.")
             return
         self._show_game_status()
 
@@ -138,24 +138,24 @@ Type 'start' to begin a new game
         Usage: name <new_name>
         """
         if not arg.strip():
-            print("❌ Please provide a name. Usage: name <new_name>")
+            print("Please provide a name. Usage: name <new_name>")
             return
 
         if not self.game:
-            print("❌ No game in progress.")
+            print("No game in progress.")
             return
 
         try:
             current_player = self.game.get_current_player()
             if not current_player.is_human():
-                print("❌ Cannot change computer player name.")
+                print("Cannot change computer player name.")
                 return
 
             old_name = current_player.get_name()
             current_player.set_name(arg.strip())
-            print(f"✅ Name changed from '{old_name}' to '{current_player.get_name()}'")
+            print(f"Name changed from '{old_name}' to '{current_player.get_name()}'")
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"Error: {e}")
 
     def do_difficulty(self, arg):
         """Set AI difficulty level.
@@ -163,12 +163,12 @@ Type 'start' to begin a new game
         Usage: difficulty <easy|medium|hard>
         """
         if not arg.strip():
-            print("❌ Usage: difficulty <easy|medium|hard>")
+            print("Usage: difficulty <easy|medium|hard>")
             return
 
         level = arg.strip().lower()
         if level not in ["easy", "medium", "hard"]:
-            print("❌ Invalid difficulty. Use: easy, medium, or hard")
+            print("Invalid difficulty. Use: easy, medium, or hard")
             return
 
         if self.game:
@@ -179,7 +179,7 @@ Type 'start' to begin a new game
             }
             self.game.set_ai_difficulty(difficulty_map[level])
 
-        print(f"🤖 AI difficulty set to: {level}")
+        print(f"AI difficulty set to: {level}")
 
     # =================== INFO COMMANDS ===================
 
@@ -187,37 +187,37 @@ Type 'start' to begin a new game
         """Show game rules."""
         print(
             """
-🎲 PIG DICE GAME RULES
+PIG DICE GAME RULES
 =======================
 
-🎯 OBJECTIVE: 
+OBJECTIVE: 
    First player to reach 100 points wins!
 
-🎮 HOW TO PLAY:
+HOW TO PLAY:
    1. Players take turns rolling a single die
    2. Each roll adds to your turn total
    3. Choose to 'roll' again or 'hold' to bank points
 
-⚠️  THE RISK:
+THE RISK:
    Rolling a 1 loses ALL points for that turn!
 
-💡 STRATEGY:
+STRATEGY:
    Balance risk vs reward:
    - Keep rolling for more points (but risk losing all)
    - Hold early to secure points (but gain fewer)
 
-🤖 AI DIFFICULTIES:
+AI DIFFICULTIES:
    - easy: Very conservative (holds at 15+ points)
    - medium: Balanced strategy (holds at ~20 points)
    - hard: Adaptive and aggressive strategy
 
-📝 AVAILABLE COMMANDS:
+AVAILABLE COMMANDS:
    Game: start, roll, hold, status, quit
    Info: rules, scores, histogram, help
    Settings: name <name>, difficulty <level>
    Fun: cheat (adds 50 points for testing)
 
-🏆 WINNING:
+WINNING:
    First to 100 points wins!
    Your stats are saved automatically.
         """
@@ -228,10 +228,10 @@ Type 'start' to begin a new game
         top_players = self.highscore.get_top_players(10)
 
         if not top_players:
-            print("📊 No scores recorded yet. Play some games!")
+            print("No scores recorded yet. Play some games!")
             return
 
-        print("\n🏆 HIGH SCORES & STATISTICS")
+        print("\nHIGH SCORES & STATISTICS")
         print("=" * 50)
         print(
             f"{'Rank':<4} {'Name':<15} {'Wins':<5} {'Played':<7} {'Win%':<6} {'Best':<5}"
@@ -268,12 +268,12 @@ Type 'start' to begin a new game
 
         current_player = self.game.get_current_player()
         if not current_player.is_human():
-            print("❌ Cannot cheat for computer player!")
+            print("Cannot cheat for computer player!")
             return
 
         current_player.add_to_turn(50)
         self.cheat_mode = True
-        print("🎭 CHEAT ACTIVATED! Added 50 points to current turn!")
+        print("CHEAT ACTIVATED! Added 50 points to current turn!")
         print("   (This is for testing purposes only)")
         self._show_game_status()
 
@@ -281,8 +281,8 @@ Type 'start' to begin a new game
 
     def do_quit(self, arg):
         """Quit the game."""
-        print("\n👋 Thanks for playing Pig Dice Game!")
-        print("🎲 Your scores have been saved.")
+        print("\nThanks for playing Pig Dice Game!")
+        print("Your scores have been saved.")
         return True
 
     def do_exit(self, arg):
@@ -296,29 +296,29 @@ Type 'start' to begin a new game
         else:
             print(
                 """
-🎲 PIG DICE GAME - AVAILABLE COMMANDS
+PIG DICE GAME - AVAILABLE COMMANDS
 ======================================
 
-🎮 GAME COMMANDS:
+GAME COMMANDS:
    start [name]     - Start new game
    roll             - Roll the dice
    hold             - Bank your turn points
    status           - Show current game status
 
-📊 INFORMATION:
+INFORMATION:
    rules            - Show game rules
    scores           - Show high scores
    histogram        - Show dice statistics
    help [command]   - Show help
 
-⚙️  SETTINGS:
+SETTINGS:
    name <new_name>  - Change your name
    difficulty <lvl> - Set AI difficulty (easy/medium/hard)
 
-🎭 FUN:
+FUN:
    cheat            - Add 50 points (testing only)
 
-🚪 EXIT:
+EXIT:
    quit / exit      - Leave the game
 
 Type 'help <command>' for specific command help.
@@ -330,10 +330,10 @@ Type 'help <command>' for specific command help.
     def _check_game_active(self) -> bool:
         """Check if game is active."""
         if not self.game:
-            print("❌ No game in progress. Use 'start' to begin.")
+            print("No game in progress. Use 'start' to begin.")
             return False
         if self.game.is_game_over():
-            print("🏆 Game is over! Use 'start' for a new game.")
+            print("Game is over! Use 'start' for a new game.")
             return False
         return True
 
@@ -343,7 +343,7 @@ Type 'help <command>' for specific command help.
             return
 
         print("\n" + "=" * 60)
-        print("🎯 GAME STATUS")
+        print("GAME STATUS")
         print("=" * 60)
 
         player1, player2 = self.game.get_players()
@@ -351,7 +351,7 @@ Type 'help <command>' for specific command help.
 
         # Show both players
         for player in [player1, player2]:
-            symbol = "👤" if player.is_human() else "🤖"
+            symbol = "" if player.is_human() else ""
             status = " 👈 CURRENT TURN" if player == current else ""
             total = player.get_total_score()
             turn = player.get_turn_score()
@@ -361,21 +361,21 @@ Type 'help <command>' for specific command help.
                 print(f" + {turn} turn points", end="")
             print(status)
 
-        print(f"\n🎯 Target: {self.game.get_winning_score()} points")
+        print(f"\nTarget: {self.game.get_winning_score()} points")
 
         if self.game.is_game_over():
             winner = self.game.get_winner()
             if winner is not None:
-                print(f"🏆 WINNER: {winner.get_name()}! 🎉")
+                print(f"WINNER: {winner.get_name()}! ")
             if self.cheat_mode:
-                print("🎭 (Cheat mode was used this game)")
+                print("(Cheat mode was used this game)")
         else:
-            print(f"\n🎲 {current.get_name()}'s turn")
+            print(f"\n {current.get_name()}'s turn")
             if current.get_turn_score() > 0:
-                print(f"💰 Current turn: {current.get_turn_score()} points")
+                print(f"Current turn: {current.get_turn_score()} points")
 
             if not current.is_human():
-                print("🤖 Computer is thinking...")
+                print(" Computer is thinking...")
 
         print("=" * 60)
 
@@ -390,7 +390,7 @@ Type 'help <command>' for specific command help.
 
         import time
 
-        print("\n🤖 Computer is playing...")
+        print("\n Computer is playing...")
         time.sleep(1)  # Dramatic pause
 
         # AI plays automatically
@@ -407,14 +407,14 @@ Type 'help <command>' for specific command help.
                 self.histogram.add_roll(result)
 
                 if result == 1:
-                    print("🤖💥 Computer rolled a 1! Turn lost.")
+                    print("💥 Computer rolled a 1! Turn lost.")
                     break
                 else:
-                    print(f"🤖🎲 Computer rolled: {result}")
+                    print(f" Computer rolled: {result}")
                     time.sleep(0.8)
             else:
                 banked = self.game.hold_turn()
-                print(f"🤖💰 Computer holds and banks {banked} points!")
+                print(f"💰 Computer holds and banks {banked} points!")
                 break
 
         self._show_game_status()

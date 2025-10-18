@@ -84,7 +84,7 @@ class Dice:
             str: Description of the dice
         """
         last_roll = self._history[-1] if self._history else "Not rolled"
-        return f"🎲 {last_roll}"
+        return f" {last_roll}"
 
     def __repr__(self) -> str:
         """Detailed string representation.

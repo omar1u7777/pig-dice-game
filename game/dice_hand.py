@@ -116,10 +116,10 @@ class DiceHand:
         """
         if self._last_roll:
             if len(self._last_roll) == 1:
-                return f"🎲 {self._last_roll[0]}"
+                return f" {self._last_roll[0]}"
             roll_str = ", ".join(map(str, self._last_roll))
-            return f"🎲 [{roll_str}]"
-        return "🎲 Not rolled"
+            return f" [{roll_str}]"
+        return " Not rolled"
 
     def __repr__(self) -> str:
         """Detailed string representation.

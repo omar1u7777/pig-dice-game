@@ -116,16 +116,16 @@ class TestDiceHand:
         hand = DiceHand()
         str_repr = str(hand)
         assert "Not rolled" in str_repr
-        assert "🎲" in str_repr
+        assert "" in str_repr
 
     def test_str_representation_rolled(self):
         """Test string representation after rolling."""
         hand = DiceHand(1)
         hand.roll()
         str_repr = str(hand)
-        assert "🎲" in str_repr
+        assert "" in str_repr
         # Should contain the rolled number
-        assert str(hand.get_last_roll()[0]) in str_repr or "🎲" in str_repr
+        assert str(hand.get_last_roll()[0]) in str_repr or "" in str_repr
 
     def test_dice_hand_consistency(self):
         """Test that dice hand maintains consistency."""
@@ -207,7 +207,7 @@ class TestDiceHand:
         hand = DiceHand(3)
         hand._last_roll = [2, 4, 6]
         str_repr = str(hand)
-        assert "🎲" in str_repr
+        assert "" in str_repr
         assert "[2, 4, 6]" in str_repr
 
     def test_repr(self):

@@ -1,4 +1,4 @@
-# Pig Dice Game 🎲
+# Pig Dice Game 
 
 A Python implementation of the classic Pig dice game with AI opponents, persistent high scores, and comprehensive test coverage.
 
@@ -157,14 +157,14 @@ Once the game starts, you can use these commands:
 
 ## Features
 
-✅ Single-player vs AI and two-player modes  
-✅ Multiple AI difficulty levels  
-✅ Persistent high score system  
-✅ Player name management  
-✅ Dice roll histogram/statistics  
-✅ Clean text-based UI with UTF-8 characters  
-✅ Input validation and error handling  
-✅ Cheat mode for testing  
+ Single-player vs AI and two-player modes  
+ Multiple AI difficulty levels  
+ Persistent high score system  
+ Player name management  
+ Dice roll histogram/statistics  
+ Clean text-based UI with UTF-8 characters  
+ Input validation and error handling  
+ Cheat mode for testing  
 
 ## Testing Statistics
 

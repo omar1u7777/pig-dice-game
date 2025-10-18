@@ -179,7 +179,7 @@ class TestPlayer:
         player = Player("Alice", is_human=True)
         player._total_score = 25
         player.add_to_turn(10)
-        expected = "👤 Alice: 25 + 10"
+        expected = " Alice: 25 + 10"
         assert str(player) == expected
 
     def test_str_ai_player(self):
@@ -187,7 +187,7 @@ class TestPlayer:
         player = Player("Bot", is_human=False)
         player._total_score = 30
         player.add_to_turn(5)
-        expected = "🤖 Bot: 30 + 5"
+        expected = " Bot: 30 + 5"
         assert str(player) == expected
 
     def test_repr(self):

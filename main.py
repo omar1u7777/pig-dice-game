@@ -6,7 +6,7 @@ from game.shell import GameShell
 
 def main():
     """Start the Pig Dice Game application."""
-    print("🎲 Welcome to Pig Dice Game! 🎲")
+    print("Welcome to Pig Dice Game!")
     print("Type 'help' for available commands")
     print("-" * 40)
 

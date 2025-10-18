@@ -84,7 +84,7 @@ class TestHistogram:
         hist = Histogram()
         display = hist.display()
         assert "No rolls recorded" in display
-        assert "📊" in display
+        assert "" in display
 
     def test_display_with_data(self):
         """Test display with data."""
@@ -92,7 +92,7 @@ class TestHistogram:
         hist.add_rolls([1, 1, 2, 3, 3, 3, 6])
 
         display = hist.display()
-        assert "📊" in display
+        assert "" in display
         assert "Total rolls: 7" in display
         assert "1:" in display
         assert "3:" in display

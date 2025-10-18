@@ -75,14 +75,14 @@ class TestDice:
     def test_str_no_rolls(self):
         """Test string representation when no rolls made."""
         dice = Dice()
-        assert str(dice) == "🎲 Not rolled"
+        assert str(dice) == " Not rolled"
 
     def test_str_after_roll(self):
         """Test string representation after rolling."""
         dice = Dice()
         with patch("random.randint", return_value=4):
             dice.roll()
-        assert str(dice) == "🎲 4"
+        assert str(dice) == " 4"
 
     def test_repr(self):
         """Test detailed string representation."""

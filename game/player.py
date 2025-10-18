@@ -161,7 +161,7 @@ class Player:
         Returns:
             str: Player description with name and scores
         """
-        symbol = "👤" if self._is_human else "🤖"
+        symbol = "" if self._is_human else ""
         return f"{symbol} {self._name}: {self._total_score} + {self._turn_score}"
 
     def __repr__(self) -> str:
